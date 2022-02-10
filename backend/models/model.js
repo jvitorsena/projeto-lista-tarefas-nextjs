@@ -12,7 +12,7 @@ module.exports = app => {
     const tarefas = db.define('tarefas',{
         id:             {type: Sequelize.INTEGER(2), autoIncrement: true, primaryKey: true},
         descricao:      {type: Sequelize.STRING(255)},
-        tiposId:        {type: Sequelize.INTEGER(2)},
+        tiposId:        {type: Sequelize.INTEGER(2), defaultValue: "1"},
         isActive:       {type: Sequelize.DataTypes.BOOLEAN, defaultValue: true}
     },{ freezeTableName: true });
 

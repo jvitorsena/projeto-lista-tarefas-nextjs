@@ -12,6 +12,7 @@ module.exports = app => {
 
     const save = async (req,res) => {
         tipos = {...req.body}
+        console.log(req)
 
         if(req.params.id) tipos.id = req.params.id
 

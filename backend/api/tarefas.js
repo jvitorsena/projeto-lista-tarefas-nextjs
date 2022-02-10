@@ -1,4 +1,5 @@
 const db = require('../models/model')
+const Sequelize = require ('sequelize')
 
 module.exports = app => {
 
@@ -12,27 +13,28 @@ module.exports = app => {
 
     const getInner = async (req, res) => {
         await db.tarefas.findAll({
-            raw: true,
-            attributes: {
-                exclude: ['createdAt', 'updatedAt', 'tiposId'] 
-            },
             include: [{
                 model: db.tipos,
                 required: true,
-                attributes: ['name'],
+                attributes: [['name','situacao']],
             }],
+            attributes: {
+                exclude: ['createdAt', 'updatedAt', 'tiposId'] 
+            },
+            attributes: ['id', ['descricao', 'tarefa',]],
+            raw: true,
             order: [['id','ASC']],
         }).then((tarefas) => {return res.status(200).json(tarefas)})
     }
 
     const save = async (req,res) => {
         const tarefas = {...req.body}
+        console.log(req.body)
 
         if(req.params.id) tarefas.id = req.params.id
         
         try {
             existsOrError(tarefas.descricao, 'Descrição não informado')
-            existsOrError(tarefas.tipoId, 'Tipo não informado')
         } catch(msg) {
             return res.status(400).send(msg)
         }
@@ -53,8 +55,7 @@ module.exports = app => {
             }).catch(() => {return res.status(400).json({erro: true})})
         } else {
             await db.tarefas.create({
-                descricao: tarefas.descricao,
-                tiposId: tarefas.tipoId
+                descricao: tarefas.descricao
             }).then(() => {
                 return res.status(200).json({
                     erro: false,
