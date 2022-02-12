@@ -4,15 +4,15 @@ const db = require('../config/db')
 module.exports = app => {
 
     const tipos = db.define('tipos', {
-        id:             {type: Sequelize.INTEGER(2), autoIncrement: true, primaryKey: true},
+        id:             {type: Sequelize.INTEGER(), autoIncrement: true, primaryKey: true},
         name:           {type: Sequelize.STRING(255)},
         isActive:       {type: Sequelize.DataTypes.BOOLEAN, defaultValue: true}
     }, {freezeTableName: true})
 
     const tarefas = db.define('tarefas',{
-        id:             {type: Sequelize.INTEGER(2), autoIncrement: true, primaryKey: true},
+        id:             {type: Sequelize.INTEGER(), autoIncrement: true, primaryKey: true},
         descricao:      {type: Sequelize.STRING(255)},
-        tiposId:        {type: Sequelize.INTEGER(2), defaultValue: "1"},
+        tiposId:        {type: Sequelize.INTEGER(), defaultValue: "1"},
         isActive:       {type: Sequelize.DataTypes.BOOLEAN, defaultValue: true}
     },{ freezeTableName: true });
 

@@ -1,0 +1,31 @@
+Usually, we do it like this
+
+export const useApiCall = () => {
+    const [ resp, setResp ] = useState();
+
+    useEffect(() => {
+        axios.get('https://some.domain/api/get').then((response) => {
+            setResp(response.data);
+        });
+    }, []);
+
+    return resp;
+}
+and then use it like so
+
+export const Table = () => {
+    const resp = useApiCall();
+    
+    return(
+        <>
+            { resp &&
+                resp.map(([key, value]) => {
+                    console.log("key: " + key);
+                    return(
+                        <SomeComponent />
+                    );
+                })
+            }
+        </>
+    );
+}
