@@ -6,7 +6,7 @@ import Modalteste from './modalteste'
 import { useEffect } from "react"
 
 export default function table(props) {
-    
+
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [descricao, setDescricao] = useState('');
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -91,6 +91,8 @@ export default function table(props) {
                     <tr>
                     <th>ID</th>
                     <th>Tarefa</th>
+                    <th>Data criação</th>
+                    <th>Hora criação</th>
                     <th>Situação</th>
                     <th></th>
                     {/* <th>Situação</th> */}
@@ -101,6 +103,8 @@ export default function table(props) {
                         <tr key={tarefa.id}>
                             <td>{tarefa.id}</td>
                             <td>{tarefa.tarefa}</td>
+                            <td>{tarefa.createdAt.substr(0,10).split('-').reverse().join('/')}</td>
+                            <td>{tarefa.createdAt}</td>
                             <td>{tarefa["tipo.situacao"]}</td>
                             <td>
                               {/* Método para deletar tarefa */}

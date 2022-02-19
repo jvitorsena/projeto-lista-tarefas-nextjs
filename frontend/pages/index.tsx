@@ -87,12 +87,14 @@ export default function Home(props) {
 }
 
 export async function getServerSideProps() {
-  const concluidos = await fetch('http://localhost:8000/tarefas/concluidos')
-  const dataConcluidos =  await concluidos.json()
-  const pendentes = await fetch('http://localhost:8000/tarefas/pendentes')
-  const dataPendentes = await pendentes.json()
-  const todasTarefas = await fetch('http://localhost:8000/tarefas')
-  const dataTodasTarefas = await todasTarefas.json()
+  const dataConcluidos = await (await axios.get('http://localhost:8000/tarefas/concluidos')).data
+  const dataPendentes = await (await axios.get('http://localhost:8000/tarefas/pendentes')).data
+  const dataTodasTarefas = await (await axios.get('http://localhost:8000/tarefas')).data
+  console.log(dataPendentes)
+
+  /* Método antigo */
+  // const todasTarefas = await fetch('http://localhost:8000/tarefas')
+  // const dataTodasTarefas = await todasTarefas.json()
 
   // console.log(data)
 

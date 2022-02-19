@@ -32,10 +32,7 @@ module.exports = app => {
                 },
                 attributes: [['name','situacao']],
             }],
-            attributes: {
-                exclude: ['createdAt', 'updatedAt', 'tiposId'] 
-            },
-            attributes: ['id', ['descricao', 'tarefa',]],
+            attributes: ['id','createdAt', ['descricao', 'tarefa',]],
             raw: true,
             order: [['id','ASC']],
         }).then((tarefas) => {return res.status(200).json(tarefas)})
@@ -51,10 +48,7 @@ module.exports = app => {
                 },
                 attributes: [['name','situacao']],
             }],
-            attributes: {
-                exclude: ['createdAt', 'updatedAt', 'tiposId'] 
-            },
-            attributes: ['id', ['descricao', 'tarefa',]],
+            attributes: ['id','createdAt', ['descricao', 'tarefa',]],
             raw: true,
             order: [['id','ASC']],
         }).then((tarefas) => {return res.status(200).json(tarefas)})

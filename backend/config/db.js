@@ -2,7 +2,13 @@ const Sequelize = require('sequelize')
 
 const sequelize = new Sequelize('tarefas','postgres','root', {
     host: 'localhost',
-    dialect: 'postgres'
+    dialectOptions: {
+     useUTC: false     // para considerar a hora da consulta como a hora 
+                       // local, logo nao soma +02:00 horas
+    },
+    dialect: 'postgres',
+    // timezone: '+03:00',// para salvar a data baseado no fuso horario
+    
 })
 
 sequelize.authenticate()
